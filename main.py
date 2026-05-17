@@ -36,6 +36,7 @@ class Student(BaseModel):
     age: int
     rollNo: int
 
+# This endpoint will accept a JSON body with the student's details and return the same details in the response.
 @app.post("/create_student")
 def create_student(student: Student):
     return {
