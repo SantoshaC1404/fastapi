@@ -10,7 +10,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 # Database connection 
 MYSQL_USER = 'root'
-MYSQL_PASSWORD = 'Santhu@7022'
+MYSQL_PASSWORD = 'Santhu%407022'
 MYSQL_HOST = 'localhost'
 MYSQL_PORT = '3306'
 MYSQL_DB = 'fastapi_db'
