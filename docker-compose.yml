@@ -1,0 +1,39 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: Santhu@7022
+      MYSQL_DATABASE: fastapi_db
+      MYSQL_USER: fastapi_user
+      MYSQL_PASSWORD: fastapi_pass
+      MYSQL_ROOT_HOST: "%"
+    ports:
+      - "3366:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+  
+
+  fastapi:
+    build: .
+    container_name: fastapi_app
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_USER: fastapi_user
+      MYSQL_PASSWORD: fastapi_pass
+      MYSQL_DB: fastapi_db
+    
+volumes:
+  mysql_data:
